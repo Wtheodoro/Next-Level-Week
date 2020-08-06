@@ -1,0 +1,23 @@
+{
+  "name": "Next-Level-Week",
+  "version": "1.0.0",
+  "description": "aqui está o que foi/será feito neste evento.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Wtheodoro/Next-Level-Week.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Wtheodoro/Next-Level-Week/issues"
+  },
+  "homepage": "https://github.com/Wtheodoro/Next-Level-Week#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
