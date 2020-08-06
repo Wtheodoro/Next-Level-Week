@@ -1,4 +1,4 @@
-const proffy = [
+const proffys = [
     {
         name: "Diego Fernandes",
         avatar: "",
@@ -14,16 +14,31 @@ const proffy = [
 
 const express = require('express')
 const server = express()
+const nunjucks = require('nunjucks')
 
-server.use(express.static('public'))
-.get("/", (req, res) => {
-    return res.sendFile(__dirname + "/views/index.html")
-})
-.get("/study", (req, res) => {
-    return res.sendFile(__dirname + "/views/study.html")
-})
-.get("/give-classes", (req, res) => {
-    return res.sendFile(__dirname + "/views/give-classes.html")
+function pageLanding(req, res) {
+    return res.render("index.html")  
+}
+
+function pageStudy(req, res) {
+    return res.render("study.html", { proffys })
+}
+
+function pageGiveClass(req, res) {
+    return res.render("give-classes.html")
+}
+
+//configure nunjucks
+nunjucks.configure('src/views', {
+    express: server,
+    noCache: true
 })
 
-.listen(5500)
+server
+//Configure statics files
+    .use(express.static('public'))
+    //Application routes
+    .get("/", pageLanding)
+    .get("/study", pageStudy)
+    .get("/give-classes", pageGiveClass)
+    .listen(5500)
