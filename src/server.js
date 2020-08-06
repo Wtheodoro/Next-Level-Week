@@ -11,6 +11,7 @@ const proffys = [
         time_to: '[1220]'
     },
 ]
+const subjects = ['Artes',  'Biologia', 'Ciências', 'Educação física', 'Física', 'Geografia', 'História', 'Matemática', 'Português', 'Química']
 
 const express = require('express')
 const server = express()
@@ -21,7 +22,8 @@ function pageLanding(req, res) {
 }
 
 function pageStudy(req, res) {
-    return res.render("study.html", { proffys })
+    const filters = req.query
+    return res.render("study.html", { proffys, filters, subjects })
 }
 
 function pageGiveClass(req, res) {
