@@ -1,6 +1,6 @@
 const Database = require('./db.js')
 const createProffy = require('./createProffy')
-Database.then((db) => {
+Database.then(async (db) => {
     // insert data
     proffyValue = {
         name: "Diego Fernandes",
@@ -17,7 +17,7 @@ Database.then((db) => {
         //Proffy id came by database
     }
 
-    classScheduleValue = [
+    classScheduleValues = [
         {
         weekday: 1,
         time_from: 720,
@@ -31,9 +31,20 @@ Database.then((db) => {
     //Classid came by database
 ]
 
-createProffy(db, {proffyValue, classValue, classScheduleValue,})
+    //await createProffy(db, { proffyValue, classValue, classScheduleValues })
+
     //consult data
 
+    // All proffys
+    const selectedProffys = await db.all("SELECT * FROM proffys")
+    console.log(selectedProffys)
 
-
+    // consult data from one proffy and bring his data
+    const selectClassesAndProffys = await db.all(`
+        SELECT classes.*, proffys.*
+        FROM proffys
+        JOIN classes ON (classes.proffy_id = proffys.id)
+        WHERE classes.proffy_id = 1;
+    `)
+    console.log(selectClassesAndProffys)
 })
