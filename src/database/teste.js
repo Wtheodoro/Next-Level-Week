@@ -12,7 +12,7 @@ Database.then(async (db) => {
     }
 
     classValue = {
-        subject: 'Química',
+        subject: 1,
         cost: '20',
         //Proffy id came by database
     }
@@ -37,7 +37,7 @@ Database.then(async (db) => {
 
     // All proffys
     const selectedProffys = await db.all("SELECT * FROM proffys")
-    console.log(selectedProffys)
+    // console.log(selectedProffys)
 
     // consult data from one proffy and bring his data
     const selectClassesAndProffys = await db.all(`
@@ -46,5 +46,18 @@ Database.then(async (db) => {
         JOIN classes ON (classes.proffy_id = proffys.id)
         WHERE classes.proffy_id = 1;
     `)
-    console.log(selectClassesAndProffys)
+    // console.log(selectClassesAndProffys)
+
+    // The time_from must be less then or equal to the requested time
+    // time_to must be higher
+    const selectClassesSchedule = await db.all(`
+        SELECT class_schedule.*
+        FROM class_schedule
+        WHERE class_schedule.class_id = "1"
+        AND class_schedule.weekday = "0"
+        AND class_schedule.time_from <= "520"
+        AND class_schedule.time_to > "520"
+    `)
+
+    // console.log(selectClassesSchedule)
 })
